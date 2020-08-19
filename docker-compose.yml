@@ -9,7 +9,10 @@ services:
     ports:
       - 27017:27017
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--keyFile", "/data/file.key", "--replSet", "rs0", "--storageEngine","wiredTiger", "--dbpath", "/data/db","--journal", "--bind_ip_all" ]
+    command: "--auth --keyFile /data/file.key --replSet rs0 --dbpath /data/db --journal --bind_ip_all"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - "./scripts/file.key:/data/file.key"
       - "./data/mongo1:/data/db"
@@ -22,7 +25,7 @@ services:
     ports:
       - 27018:27017
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--keyFile", "/data/file.key", "--replSet", "rs0", "--storageEngine","wiredTiger", "--dbpath", "/data/db", "--journal", "--bind_ip_all" ]
+    command: "--keyFile /data/file.key --replSet rs0 --dbpath /data/db --journal --bind_ip_all"
     volumes:
       - "./scripts/file.key:/data/file.key"
       - "./data/mongo2:/data/db"
@@ -35,7 +38,7 @@ services:
     ports:
       - 27019:27017
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--keyFile", "/data/file.key", "--replSet", "rs0", "--storageEngine", "wiredTiger", "--dbpath", "/data/db", "--journal", "--bind_ip_all" ]
+    command: "--keyFile /data/file.key --replSet rs0 --dbpath /data/db --journal --bind_ip_all"
     volumes:
       - "./scripts/file.key:/data/file.key"
       - "./data/mongo3:/data/db"
