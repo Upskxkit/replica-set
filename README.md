@@ -27,6 +27,7 @@
 ```
 $openssl rand -base64 756 > <path-to-keyfile> 
 $chmod 400 <path-to-keyfile>
+$chown 999 <path-to-keyfile> - The file owner was changed to a user id of “999" because the user in the MongoDB Docker container is the one that needs to access this key file.
 ```
 
 ###Allocate file to all members
